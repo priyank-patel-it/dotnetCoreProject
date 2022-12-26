@@ -1,0 +1,70 @@
+@model PWSched_dotnet_mvc.Models.ShiftLocationViewModel
+
+@{
+    ViewData["Title"] = "All Shifts";
+}
+
+<h1>All Shifts</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Shifts" asp-action="Index" method="get">
+    <p>
+        <select asp-for="ShiftLocation" asp-items="Model.Locations">
+            <option value="">All</option>
+        </select>
+        Volunteer: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shifts[0].Volunteer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shifts[0].ShiftDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shifts[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shifts[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shifts[0].EndTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Shifts) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShiftDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
